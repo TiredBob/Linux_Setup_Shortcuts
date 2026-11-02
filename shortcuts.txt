@@ -7,5 +7,5 @@ sudo apt update && (sudo apt install -y eza || (curl -fsSL -o /tmp/eza.tar.gz ht
 Ubuntu/Debian alias to upgrade installed packages:
 grep -qxF "alias upgrade='sudo apt update && sudo apt upgrade -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt upgrade -y'" >> ~/.bash_aliases && source ~/.bash_aliases
 
-With auto remove: 
+With autoremove: 
 grep -qxF "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" >> ~/.bash_aliases && source ~/.bash_aliases
