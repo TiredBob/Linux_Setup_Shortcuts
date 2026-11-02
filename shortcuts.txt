@@ -9,3 +9,9 @@ grep -qxF "alias upgrade='sudo apt update && sudo apt upgrade -y'" ~/.bash_alias
 
 With autoremove: 
 grep -qxF "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+duf as df (only showing local filesystems):
+command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; } && grep -qxF "alias df='duf --only local'" ~/.bash_aliases 2>/dev/null || echo "alias df='duf --only local'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+And duf as df using standard duf:
+command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; } && grep -qxF "alias df='duf'" ~/.bash_aliases 2>/dev/null || echo "alias df='duf'" >> ~/.bash_aliases && source ~/.bash_aliases
