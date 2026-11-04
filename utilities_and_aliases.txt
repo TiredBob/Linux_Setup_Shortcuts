@@ -10,7 +10,7 @@ command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; 
 # And duf as df using standard duf:
 command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; } && grep -qxF "alias df='duf'" ~/.bash_aliases 2>/dev/null || echo "alias df='duf'" >> ~/.bash_aliases && source ~/.bash_aliases
 
-# Ubuntu/Debian alias to upgrade installed packages:
+# Ubuntu/Debian alias to upgrade installed packages (run upgrade from the command line):
 grep -qxF "alias upgrade='sudo apt update && sudo apt upgrade -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt upgrade -y'" >> ~/.bash_aliases && source ~/.bash_aliases
 
 # With autoremove: 
