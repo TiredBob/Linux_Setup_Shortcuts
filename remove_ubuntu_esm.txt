@@ -1,0 +1,8 @@
+# Run this command to remove the Ubuntu ESM message:
+sudo sed -Ezi.orig \
+  -e 's/(def _output_esm_service_status.outstream, have_esm_service, service_type.:\n)/\1    return\n/' \
+  -e 's/(def _output_esm_package_alert.*?\n.*?\n.:\n)/\1    return\n/' \
+  /usr/lib/update-notifier/apt_check.py
+
+
+# Stolen from jwatson0 @ https://askubuntu.com/questions/1453749/inhibit-esm-messages-at-login and tested to be working on 26.04
