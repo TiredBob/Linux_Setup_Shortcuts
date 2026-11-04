@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Creates a new user using another user as a template."
+echo "Creates a new user using another user as a template. Run with sudo"
 echo
 echo "Usage:"
 echo "  $0 <existing_user> <new_user>"
