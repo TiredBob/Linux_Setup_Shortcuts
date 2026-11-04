@@ -1,0 +1,17 @@
+Single line script to install Eza, and replace ls and ll in .bash_aliases (needs NerdFonts for Icon Support):
+sudo apt update && (sudo apt install -y eza || (curl -fsSL -o /tmp/eza.tar.gz https://github.com/eza-community/eza/releases/latest/download/eza_aarch64-unknown-linux-gnu.tar.gz && tar -xzf /tmp/eza.tar.gz -C /tmp && sudo install -m755 /tmp/eza /usr/local/bin/eza)) && { grep -qxF "alias ls='eza --icons=auto'" ~/.bash_aliases 2>/dev/null || echo "alias ls='eza --icons=auto'" >> ~/.bash_aliases; grep -qxF "alias ll='eza -lah --icons=auto'" ~/.bash_aliases 2>/dev/null || echo "alias ll='eza -lah --icons=auto'" >> ~/.bash_aliases; } && source ~/.bash_aliases
+
+Another version without icons:
+sudo apt update && (sudo apt install -y eza || (curl -fsSL -o /tmp/eza.tar.gz https://github.com/eza-community/eza/releases/latest/download/eza_aarch64-unknown-linux-gnu.tar.gz && tar -xzf /tmp/eza.tar.gz -C /tmp && sudo install -m755 /tmp/eza /usr/local/bin/eza)) && { grep -qxF "alias ls='eza'" ~/.bash_aliases 2>/dev/null || echo "alias ls='eza'" >> ~/.bash_aliases; grep -qxF "alias ll='eza -lah'" ~/.bash_aliases 2>/dev/null || echo "alias ll='eza -lah'" >> ~/.bash_aliases; } && source ~/.bash_aliases
+
+Ubuntu/Debian alias to upgrade installed packages:
+grep -qxF "alias upgrade='sudo apt update && sudo apt upgrade -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt upgrade -y'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+With autoremove: 
+grep -qxF "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+duf as df (only showing local filesystems):
+command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; } && grep -qxF "alias df='duf --only local'" ~/.bash_aliases 2>/dev/null || echo "alias df='duf --only local'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+And duf as df using standard duf:
+command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; } && grep -qxF "alias df='duf'" ~/.bash_aliases 2>/dev/null || echo "alias df='duf'" >> ~/.bash_aliases && source ~/.bash_aliases
