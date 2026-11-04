@@ -21,7 +21,7 @@ PROMPT_COMMAND=prompt_command
 
 EOF
 
-    echo "Exit Status installed."
+    echo "Exit Status installed. Please run 'source .bashrc' without the single quotes."
 else
     echo "Exit Status already installed."
 fi
