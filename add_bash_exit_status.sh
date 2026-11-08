@@ -1,5 +1,6 @@
 #!/bin/bash
 # Adds exit status above prompt on command failure
+# Assumes you're using bash and .bashrc
 
 if ! grep -q "^PROMPT_COMMAND=prompt_command$" ~/.bashrc; then
 cat >> ~/.bashrc <<'EOF'
