@@ -1,3 +1,5 @@
+# This document assumes you're using bash, have .bash_aliases in your home folder, and.bashrc is configured to use .bash_aliases.
+
 # Single line script to install Eza, and replace ls and ll in .bash_aliases (needs NerdFonts for Icon Support):
 sudo apt update && (sudo apt install -y eza || (case "$(uname -m)" in x86_64) asset=eza_x86_64-unknown-linux-gnu.tar.gz ;; aarch64|arm64) asset=eza_aarch64-unknown-linux-gnu.tar.gz ;; *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;; esac && curl -fsSL -o /tmp/eza.tar.gz "https://github.com/eza-community/eza/releases/latest/download/$asset" && tar -xzf /tmp/eza.tar.gz -C /tmp && sudo install -m755 /tmp/eza /usr/local/bin/eza)) && { grep -qxF "alias ls='eza --icons=auto'" ~/.bash_aliases 2>/dev/null || echo "alias ls='eza --icons=auto'" >> ~/.bash_aliases; grep -qxF "alias ll='eza -lah --icons=auto'" ~/.bash_aliases 2>/dev/null || echo "alias ll='eza -lah --icons=auto'" >> ~/.bash_aliases; } && source ~/.bash_aliases
 
