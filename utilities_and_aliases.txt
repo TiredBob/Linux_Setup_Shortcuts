@@ -10,11 +10,24 @@ sudo apt update && (sudo apt install -y eza || (case "$(uname -m)" in x86_64) as
 # And duf as df using standard duf:
 (command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; }) && { grep -qxF "alias df='duf'" ~/.bash_aliases 2>/dev/null || echo "alias df='duf'" >> ~/.bash_aliases; } && source ~/.bash_aliases
 
-# Ubuntu/Debian alias to upgrade installed packages (run upgrade from the command line):
-grep -qxF "alias upgrade='sudo apt update && sudo apt upgrade -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt upgrade -y'" >> ~/.bash_aliases && source ~/.bash_aliases
+# Alias to upgrade installed packages (run upgrade from the command line) works with apt/dnf/pacman:
+grep -qF '# upgrade function: apt/dnf/pacman' ~/.bash_aliases 2>/dev/null || cat >> ~/.bash_aliases <<'EOF'
+# upgrade function: apt/dnf/pacman
+upgrade() {
+  if command -v apt >/dev/null 2>&1; then
+    sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
+  elif command -v dnf >/dev/null 2>&1; then
+    sudo dnf upgrade --refresh -y && sudo dnf autoremove -y
+  elif command -v pacman >/dev/null 2>&1; then
+    sudo pacman -Syu --noconfirm
+  else
+    echo "No supported package manager found (apt, dnf, or pacman)." >&2
+    return 1
+  fi
+}
+EOF
+source ~/.bash_aliases
 
-# With autoremove: 
-grep -qxF "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" ~/.bash_aliases 2>/dev/null || echo "alias upgrade='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y'" >> ~/.bash_aliases && source ~/.bash_aliases
 
-# If you don't want to use the upgrade command, and prefer auto updates:
+# If you don't want to use the upgrade command, and prefer auto updates (Ubuntu/Deb based):
 sudo apt install unattended-upgrades && sudo dpkg-reconfigure unattended-upgrades
