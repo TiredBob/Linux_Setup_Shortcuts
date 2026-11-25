@@ -12,6 +12,10 @@ sudo apt update && (sudo apt install -y eza || (case "$(uname -m)" in x86_64) as
 # And duf as df using standard duf:
 (command -v duf >/dev/null 2>&1 || { sudo apt update && sudo apt install -y duf; }) && { grep -qxF "alias df='duf'" ~/.bash_aliases 2>/dev/null || echo "alias df='duf'" >> ~/.bash_aliases; } && source ~/.bash_aliases
 
+# Install Zoxide and have it replace CD. To use CD without Zoxide use \cd
+sudo apt update && sudo apt install -y zoxide && grep -qxF 'eval "$(zoxide init bash --cmd cd)"' ~/.bashrc || echo 'eval "$(zoxide init bash --cmd cd)"' >> ~/.bashrc && source ~/.bashrc
+
+
 # Alias to upgrade installed packages (run upgrade from the command line) works with apt/dnf/pacman:
 grep -qF '# upgrade function: apt/dnf/pacman' ~/.bash_aliases 2>/dev/null || cat >> ~/.bash_aliases <<'EOF'
 # upgrade function: apt/dnf/pacman
