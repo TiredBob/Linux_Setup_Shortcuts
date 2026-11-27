@@ -17,9 +17,7 @@ sudo apt update && sudo apt install -y zoxide && grep -qxF 'eval "$(zoxide init 
 
 # Make directory, and cd into it in one command. Idea was taken from Buffalo Linux User Group suggestion in Discord.
 
-mkcd() {
-    mkdir -p "$1" && cd "$1"
-}
+echo 'mkcd() { mkdir -p "$1" && cd "$1"; }' | tee -a ~/.bashrc && source ~/.bashrc
 
 # Alias to upgrade installed packages (run upgrade from the command line) works with apt/dnf/pacman:
 grep -qF '# upgrade function: apt/dnf/pacman' ~/.bash_aliases 2>/dev/null || cat >> ~/.bash_aliases <<'EOF'
